@@ -2,37 +2,60 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.iconButton {
+  transition: all 0.2s !important;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.iconButton:hover {
+  background-color: #c5c5c5 !important;
+  box-shadow: 0 7px 7px rgb(0, 0, 0 , 0.4);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.todoCard {
+  transition: all 0.2s !important;
 }
 
-.App-link {
-  color: #61dafb;
+.todoCard:hover {
+  padding-top: 15px;
+  padding-bottom: 15px;
+    box-shadow: 0 7px 7px rgb(0, 0, 0, 0.4);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Custom font  */
+@font-face {
+  font-family: Tajawal;
+  src: url(../public/fonts/Tajawal-Black.ttf);
+  font-weight: 900 ;
 }
+@font-face {
+  font-family: Tajawal;
+  src: url(../public/fonts/Tajawal-ExtraBold.ttf);
+  font-weight: 800 ;
+}
+@font-face {
+  font-family: Tajawal;
+  src: url(../public/fonts/Tajawal-Bold.ttf);
+  font-weight: bold ;
+}
+@font-face {
+  font-family: Tajawal;
+  src: url(../public/fonts/Tajawal-Medium.ttf);
+  font-weight: 500 ;
+}
+@font-face {
+  font-family: Tajawal;
+  src: url(../public/fonts/Tajawal-Regular.ttf);
+  font-weight: 400 ;
+}
+@font-face {
+  font-family: Tajawal;
+  src: url(../public/fonts/Tajawal-Light.ttf);
+  font-weight: 300 ;
+}
+@font-face {
+  font-family: Tajawal;
+  src: url(../public/fonts/Tajawal-ExtraLight.ttf);
+  font-weight: 200 ;
+}
+
+/* //Custom font//  */
