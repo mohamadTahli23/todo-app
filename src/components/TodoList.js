@@ -11,8 +11,7 @@ import Grid from "@mui/material/Unstable_Grid2";
 import TextField from "@mui/material/TextField";
 
 /*// Material Ui //*/
-import { useState } from "react";
-import { useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { TodosContext } from "../contexts/todosContext";
 import Todo from "../components/Todo";
 import { v4 as uuidv4 } from "uuid";
@@ -20,6 +19,39 @@ import { v4 as uuidv4 } from "uuid";
 export default function TodoList() {
   const { todos, setTodos } = useContext(TodosContext);
   const [titleInput, setTitleInput] = useState("");
+  const [displayedTodosType, setdisplayedTodosType] = useState("all");
+
+  // Filtration Array
+  const complatedTodos = todos.filter((el) => {
+    return el.isCompleted;
+  });
+
+  const nonComplatedTodos = todos.filter((el) => {
+    return !el.isCompleted;
+  });
+
+  let todosToBeRendered = todos;
+
+  if (displayedTodosType == "completed") {
+    todosToBeRendered = complatedTodos;
+  } else if (displayedTodosType == "non-completed") {
+    todosToBeRendered = nonComplatedTodos;
+  } else {
+    todosToBeRendered = todos;
+  }
+
+  const todoJsx = todosToBeRendered.map((el) => {
+    return <Todo key={el.id} todo={el}></Todo>;
+  });
+
+  useEffect(() => {
+    const storageTodos = JSON.parse(localStorage.getItem("todos")) ?? [];
+    setTodos(storageTodos);
+  }, []);
+
+  function changeDisplayedType(e) {
+    setdisplayedTodosType(e.target.value);
+  }
 
   function handelAddClick() {
     const newTodo = {
@@ -28,16 +60,19 @@ export default function TodoList() {
       details: "",
       isCompleted: false,
     };
-    setTodos([...todos, newTodo]);
+    const updatedTodos = [...todos, newTodo];
+    setTodos(updatedTodos);
+    localStorage.setItem("todos", JSON.stringify(updatedTodos));
+
     setTitleInput("");
   }
 
-  const todoJsx = todos.map((el) => {
-    return <Todo key={el.id} todo={el}></Todo>;
-  });
   return (
     <Container maxWidth="sm">
-      <Card sx={{ minWidth: 275 }}>
+      <Card
+        sx={{ minWidth: 275 }}
+        style={{ maxHeight: "80vh", overflowY: "scroll" }}
+      >
         <CardContent>
           <Typography variant="h2" fontWeight={"bold"}>
             مهامي
@@ -46,14 +81,14 @@ export default function TodoList() {
           {/* Filter Buttons */}
           <ToggleButtonGroup
             style={{ direction: "ltr", marginTop: "30px" }}
-            /*             value={alignment}
-             */ exclusive
-            /*             onChange={handleAlignment}
-             */ aria-label="text alignment"
+            value={displayedTodosType}
+            exclusive
+            onChange={changeDisplayedType}
+            aria-label="text alignment"
           >
-            <ToggleButton value="right">غير المنجز</ToggleButton>
-            <ToggleButton value="center">المنجز</ToggleButton>
-            <ToggleButton value="left">الكل</ToggleButton>
+            <ToggleButton value="non-completed">غير المنجز</ToggleButton>
+            <ToggleButton value="completed">المنجز</ToggleButton>
+            <ToggleButton value="all">الكل</ToggleButton>
           </ToggleButtonGroup>
           {/*====== Filter Buttons =====*/}
 
@@ -89,6 +124,7 @@ export default function TodoList() {
                 onClick={() => {
                   handelAddClick();
                 }}
+                disabled={titleInput.length == 0}
               >
                 إضافة
               </Button>

@@ -31,6 +31,11 @@ function App() {
     typography: {
       fontFamily: ["Tajawal"],
     },
+    palette: {
+      primary: {
+        main: "#004d40",
+      },
+    },
   });
   const mainStyle = {
     display: "flex",

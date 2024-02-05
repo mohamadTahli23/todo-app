@@ -43,6 +43,7 @@ export default function Todo({ todo }) {
       return el;
     });
     setTodos(updatedTodos);
+    localStorage.setItem("todos", JSON.stringify(updatedTodos));
   }
 
   function handeleDeleteClick() {
@@ -66,6 +67,7 @@ export default function Todo({ todo }) {
       return el.id != todo.id;
     });
     setTodos(updatedTodos);
+    localStorage.setItem("todos", JSON.stringify(updatedTodos));
   }
 
   function handeleUpdateCofirem() {
@@ -83,6 +85,7 @@ export default function Todo({ todo }) {
 
     setTodos(updatedTodos);
     setshowUpdateDialog(false);
+    localStorage.setItem("todos", JSON.stringify(updatedTodos));
   }
 
   /* //Event Handler// */
@@ -175,7 +178,13 @@ export default function Todo({ todo }) {
         <CardContent>
           <Grid container spacing={2}>
             <Grid xs={8}>
-              <Typography variant="h5" sx={{ textAlign: "right" }}>
+              <Typography
+                variant="h5"
+                sx={{
+                  textAlign: "right",
+                  textDecoration: todo.isCompleted ? "line-through" : "none",
+                }}
+              >
                 {todo.title}
               </Typography>
               <Typography variant="h6" sx={{ textAlign: "right" }}>
