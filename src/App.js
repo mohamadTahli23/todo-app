@@ -7,6 +7,7 @@ import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import MySnackBar from "./components/MySnackBar";
 import { ToastProvider } from "./contexts/ToastContext";
+import TodosProvider from "./contexts/todosContext";
 
 const initialsTodos = [
   {
@@ -53,13 +54,13 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <ToastProvider>
-        <div style={mainStyle} className="App">
-          <TodosContext.Provider value={{ todos, setTodos }}>
+      <TodosProvider>
+        <ToastProvider>
+          <div style={mainStyle} className="App">
             <TodoList></TodoList>
-          </TodosContext.Provider>
-        </div>
-      </ToastProvider>
+          </div>
+        </ToastProvider>
+      </TodosProvider>
     </ThemeProvider>
   );
 }

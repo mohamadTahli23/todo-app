@@ -20,18 +20,18 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 /*=== Dialog Import ===*/
 
-import { useState, useContext, useEffect, useMemo, useReducer } from "react";
-import { TodosContext } from "../contexts/todosContext";
+import { useState, useEffect, useMemo, useReducer } from "react";
+import { useTodos, useTodosdispatch } from "../contexts/todosContext";
 import { useToast } from "../contexts/ToastContext";
 import Todo from "../components/Todo";
 import { v4 as uuidv4 } from "uuid";
 import todosReducer from "../reducers/todosReducer.js";
 
 export default function TodoList() {
-  const { todos2, setTodos } = useContext(TodosContext);
   const { showHideToast } = useToast();
 
-  const [todos, dispatch] = useReducer(todosReducer, []);
+  const todos = useTodos();
+  const dispatch = useTodosdispatch();
 
   const [titleInput, setTitleInput] = useState("");
   const [showDeleteDialog, setshowDeleteDialog] = useState(false);
@@ -66,8 +66,7 @@ export default function TodoList() {
   // === Filtration Array === //
 
   useEffect(() => {
-    const storageTodos = JSON.parse(localStorage.getItem("todos")) ?? [];
-    setTodos(storageTodos);
+    dispatch({ type: "get" });
   }, []);
 
   // Change Between Tags All - completed - non completed
@@ -78,15 +77,7 @@ export default function TodoList() {
   /* Events Handler */
 
   function handelAddClick() {
-    const newTodo = {
-      id: uuidv4(),
-      title: titleInput,
-      details: "",
-      isCompleted: false,
-    };
-    const updatedTodos = [...todos, newTodo];
-    setTodos(updatedTodos);
-    localStorage.setItem("todos", JSON.stringify(updatedTodos));
+    dispatch({ type: "added", payload: { newTitle: titleInput } });
     setTitleInput("");
     showHideToast("تمت الإضافة بنجاح ");
   }
@@ -101,11 +92,7 @@ export default function TodoList() {
   }
 
   function handeleDeleteCofirem() {
-    const updatedTodos = todos.filter((el) => {
-      return el.id != dialogTodo.id;
-    });
-    setTodos(updatedTodos);
-    localStorage.setItem("todos", JSON.stringify(updatedTodos));
+    dispatch({ type: "deleted", payload: dialogTodo });
     setshowDeleteDialog(false);
     showHideToast("تم الحذف بنجاح");
   }
@@ -120,20 +107,8 @@ export default function TodoList() {
   }
 
   function handeleUpdateCofirem() {
-    const updatedTodos = todos.map((el) => {
-      if (el.id == dialogTodo.id) {
-        return {
-          ...el,
-          title: dialogTodo.title,
-          details: dialogTodo.details,
-        };
-      } else {
-        return el;
-      }
-    });
-    setTodos(updatedTodos);
+    dispatch({ type: "updated", payload: dialogTodo });
     setshowUpdateDialog(false);
-    localStorage.setItem("todos", JSON.stringify(updatedTodos));
     showHideToast("تم التحديث بنجاح");
   }
 

@@ -1,12 +1,9 @@
 /* Material Ui */
-import Container from "@mui/material/Container";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Unstable_Grid2";
 import IconButton from "@mui/material/IconButton";
-import TextField from "@mui/material/TextField";
 
 /* Icons components */
 import CheckIcon from "@mui/icons-material/Check";
@@ -15,24 +12,16 @@ import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 /* ==== Icons components ==== */
 /*// Material Ui //*/
 
-import { useContext } from "react";
-import { TodosContext } from "../contexts/todosContext";
 import { useToast } from "../contexts/ToastContext";
+import { useTodosdispatch } from "../contexts/todosContext";
 
 export default function Todo({ todo, showDelete, showUpdate }) {
-  const { todos, setTodos } = useContext(TodosContext);
+  const dispatch = useTodosdispatch();
   const { showHideToast } = useToast();
 
   /* Event Handler */
   function handelCheckClicked() {
-    const updatedTodos = todos.map((el) => {
-      if (el.id == todo.id) {
-        el.isCompleted = !el.isCompleted;
-      }
-      return el;
-    });
-    setTodos(updatedTodos);
-    localStorage.setItem("todos", JSON.stringify(updatedTodos));
+    dispatch({ type: "toggledCompleted", payload: todo });
     showHideToast("تم التعديل بنجاح");
   }
 
