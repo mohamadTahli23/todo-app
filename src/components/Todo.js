@@ -15,24 +15,13 @@ import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 /* ==== Icons components ==== */
 /*// Material Ui //*/
 
-/* Dialog Import */
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { TodosContext } from "../contexts/todosContext";
+import { useToast } from "../contexts/ToastContext";
 
-export default function Todo({ todo }) {
-  const [showDeleteDialog, setshowDeleteDialog] = useState(false);
-  const [showUpdateDialog, setshowUpdateDialog] = useState(false);
-  const [updatedTodo, setUpdatedTodo] = useState({
-    title: todo.title,
-    details: todo.details,
-  });
+export default function Todo({ todo, showDelete, showUpdate }) {
   const { todos, setTodos } = useContext(TodosContext);
+  const { showHideToast } = useToast();
 
   /* Event Handler */
   function handelCheckClicked() {
@@ -44,128 +33,21 @@ export default function Todo({ todo }) {
     });
     setTodos(updatedTodos);
     localStorage.setItem("todos", JSON.stringify(updatedTodos));
+    showHideToast("تم التعديل بنجاح");
   }
 
   function handeleDeleteClick() {
-    setshowDeleteDialog(true);
+    showDelete(todo);
   }
 
   function handelUpdateClick() {
-    setshowUpdateDialog(true);
-  }
-
-  function handelDeleteClose() {
-    setshowDeleteDialog(false);
-  }
-
-  function handelUpdateClose() {
-    setshowUpdateDialog(false);
-  }
-
-  function handeleDeleteCofirem() {
-    const updatedTodos = todos.filter((el) => {
-      return el.id != todo.id;
-    });
-    setTodos(updatedTodos);
-    localStorage.setItem("todos", JSON.stringify(updatedTodos));
-  }
-
-  function handeleUpdateCofirem() {
-    const updatedTodos = todos.map((el) => {
-      if (el.id == todo.id) {
-        return {
-          ...el,
-          title: updatedTodo.title,
-          details: updatedTodo.details,
-        };
-      } else {
-        return el;
-      }
-    });
-
-    setTodos(updatedTodos);
-    setshowUpdateDialog(false);
-    localStorage.setItem("todos", JSON.stringify(updatedTodos));
+    showUpdate(todo);
   }
 
   /* //Event Handler// */
 
   return (
     <>
-      {/* Delete Dialog */}
-      <Dialog
-        style={{ direction: "rtl" }}
-        onClose={handelDeleteClose}
-        open={showDeleteDialog}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">
-          هل أنت متأكد من رغبتك في حذف المهمة؟
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            لا يمكنك التراجع عن الحذف بعد إتمامه.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handelDeleteClose}>إغلاق</Button>
-          <Button autoFocus on onClick={handeleDeleteCofirem}>
-            نعم، قم بالحذف
-          </Button>
-        </DialogActions>
-      </Dialog>
-      {/*// Delete Dialog //*/}
-
-      {/* Update Dialog */}
-      <Dialog
-        style={{ direction: "rtl" }}
-        onClose={handelUpdateClose}
-        open={showUpdateDialog}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">تعديل مهمة</DialogTitle>
-        <DialogContent>
-          <TextField
-            autoFocus
-            required
-            margin="dense"
-            id="name"
-            name="email"
-            label="عنوان المهمة"
-            fullWidth
-            variant="standard"
-            value={updatedTodo.title}
-            onChange={(e) => {
-              setUpdatedTodo({ ...updatedTodo, title: e.target.value });
-            }}
-          />
-
-          <TextField
-            autoFocus
-            required
-            margin="dense"
-            id="name"
-            name="email"
-            label="التفاصيل"
-            fullWidth
-            variant="standard"
-            value={updatedTodo.details}
-            onChange={(e) => {
-              setUpdatedTodo({ ...updatedTodo, details: e.target.value });
-            }}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handelUpdateClose}>إغلاق</Button>
-          <Button autoFocus on onClick={handeleUpdateCofirem}>
-            تأكيد
-          </Button>
-        </DialogActions>
-      </Dialog>
-      {/*// Update Dialog //*/}
-
       <Card
         className="todoCard"
         sx={{
@@ -210,6 +92,7 @@ export default function Todo({ todo }) {
                   border: "3px solid #8bc34a",
                 }}
                 aria-label="CheckIcon"
+                classes={"size"}
               >
                 <CheckIcon />
               </IconButton>
@@ -225,6 +108,7 @@ export default function Todo({ todo }) {
                   border: "3px solid #1769aa",
                 }}
                 aria-label="CheckIcon"
+                classes={"size"}
               >
                 <ModeEditOutlineIcon />
               </IconButton>
@@ -240,6 +124,7 @@ export default function Todo({ todo }) {
                   border: "3px solid #b23c17",
                 }}
                 aria-label="CheckIcon"
+                classes={"size"}
               >
                 <DeleteIcon />
               </IconButton>

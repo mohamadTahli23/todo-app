@@ -21,6 +21,12 @@
     box-shadow: 0 7px 7px rgb(0, 0, 0, 0.4);
 }
 
+.size { 
+  padding: 0 !important;
+  margin: 0 !important;
+  width: 30px !important;
+}
+
 /* Custom font  */
 @font-face {
   font-family: Tajawal;
@@ -59,3 +65,7 @@
 }
 
 /* //Custom font//  */
+
+@media (max-width: 768px) {
+
+}
