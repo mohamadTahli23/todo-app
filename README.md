@@ -1,3 +1,12 @@
+# Todo React App
+This is a project for tracking todo list, it also allow you to add tags on completed work and show non-completed work 
+in easy way.
+
+## Live Demo 
+
+https://todoapptahli.netlify.app/
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
