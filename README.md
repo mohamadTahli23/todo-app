@@ -2,6 +2,14 @@
 This is a project for tracking todo list, it also allow you to add tags on completed work and show non-completed work 
 in easy way.
 
+## Techniques
+
+- HTML5 - CSS3 - Javascript 
+
+- Material UI
+
+- React js 
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
