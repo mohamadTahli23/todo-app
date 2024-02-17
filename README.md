@@ -2,11 +2,6 @@
 This is a project for tracking todo list, it also allow you to add tags on completed work and show non-completed work 
 in easy way.
 
-## Live Demo 
-
-https://todoapptahli.netlify.app/
-
-
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -48,32 +43,14 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+## Screenshot
+![todoapp#2](https://github.com/mohamadTahli23/Logstic-co/assets/77210237/8a7d3fe9-1b47-40e7-aecf-fdbdfe0ceb08)
+![todoapp#3](https://github.com/mohamadTahli23/Logstic-co/assets/77210237/7b7482ba-ee75-4c3c-91f6-f805743b6b9c)
+![todoapp#1](https://github.com/mohamadTahli23/Logstic-co/assets/77210237/54cc4780-90af-45ad-8177-d3ad5b1b52cb)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Live Demo 
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+https://todoapp-tahli.netlify.app/
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
