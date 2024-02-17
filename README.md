@@ -46,7 +46,6 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 ## Screenshot
 ![todoapp#2](https://github.com/mohamadTahli23/Logstic-co/assets/77210237/8a7d3fe9-1b47-40e7-aecf-fdbdfe0ceb08)
 ![todoapp#3](https://github.com/mohamadTahli23/Logstic-co/assets/77210237/7b7482ba-ee75-4c3c-91f6-f805743b6b9c)
-![todoapp#1](https://github.com/mohamadTahli23/Logstic-co/assets/77210237/54cc4780-90af-45ad-8177-d3ad5b1b52cb)
 
 ## Live Demo 
 
